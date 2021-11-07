@@ -14,5 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+Route::get('/seller', 'sellerController@index');
+Route::get('/seller/bird','SellerController@bird');
+Route::post('/seller/bird/input','SellerController@saveBird');
+Route::get('/user', 'UserController@index');
+Route::post('/create/user','RegisterController@create');
+Route::post('/create/seller','SellerController@create');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
