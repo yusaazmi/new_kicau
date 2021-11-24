@@ -13,7 +13,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Tables</h4>
+                        <h4 class="page-title">Pemesananku</h4>
                         <div class="ms-auto text-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -41,10 +41,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div class="p-2">
-                                        <h5 class="card-title">Basic Datatable</h5>
-                                    </div>
-                                    <div class="p-2">
-                                        <a href="/seller/bird/input" class="btn btn-primary">Tambah Burung</a>
+                                        {{-- <h5 class="card-title">Basic Datatable</h5> --}}
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -52,36 +49,24 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>Nama Pembeli</th>
                                                 <th>Jenis Burung</th>
                                                 <th>Jenis Kelamin</th>
-                                                <th>Umur</th>
-                                                <th>Harga</th>
-                                                <th>Deksripsi</th>
-                                                <th>Gambar</th>
-                                                <th>Aksi</th>
+                                                <th>Total Harga</th>
+                                                <th>Lokasi COD</th>
+                                                <th>Status Pembayaran</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($birds as $data)
+                                            @foreach ($order as $data)
                                             <tr>
                                                 <td>1</td>
+                                                <td>{{ucfirst($data->name)}}</td>
                                                 <td>{{$data->jenis_burung}}</td>
                                                 <td>{{$data->jenis_kelamin}}</td>
-                                                <td>{{$data->umur}}</td>
-                                                <td>Rp.{{number_format($data->harga)}}</td>
-                                                <td>{{$data->deskripsi}}</td>
-                                                <td>
-                                                    <img src="{{asset('src/images/birds/'.$data->gambar)}}" width="50px" height="50px" alt="">
-                                                </td>
-                                                <td><div class="d-flex justify-content-between">
-                                                    <div class="p-0">
-                                                        <a href="/seller/bird/edit/{{$data->id}}" class="btn btn-secondary">Edit</a>
-                                                    </div>
-                                                    <div class="p-0">
-                                                        <a href="/seller/bird/delete/{{$data->id}}" class="btn btn-danger">Delete</a>
-                                                    </div>
-                                                    </div>
-                                                </td>
+                                                <td>{{number_format($data->total_price)}}</td>
+                                                <td><a href="{{$data->cod}}">Lihat Lokasi</a></td>
+                                                <td>{{$data->status}}</td>
                                             </tr>
                                             @endforeach
                                     </table>

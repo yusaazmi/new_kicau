@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Role;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
+
 
 class RegisterController extends Controller
 {
@@ -24,7 +26,25 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function createUser(Request $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        $user->roles()->attach(Role::where('name','user')->first());
+        toast('Pendaftaran Berhasil','success');
+        return redirect()->route('login');
+        
+    }
+
+    public function sellerCreate()
+    {
+        return view('auth.register_seller');
+    }
+    public function createSeller(Request $request)
     {
         $user = User::create([
             'name' => $request->name,
@@ -33,8 +53,10 @@ class RegisterController extends Controller
         ]);
 
         $user->roles()->attach(Role::where('name','seller')->first());
+        toast('Pendaftaran Berhasil','success');
 
-        return $user;
+        return redirect()->route('login');
+
     }
 
     /**

@@ -21,4 +21,8 @@ class Bird extends Model
     {
         return $this->belongsToMany(User::class,'birds');
     }
+    public function order()
+    {
+        return $this->belongsTo(Order::class,'orders');
+    }
 }

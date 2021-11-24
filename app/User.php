@@ -44,8 +44,12 @@ class User extends Authenticatable
     {
     return $this->roles()->where('name', $role)->count() == 1;
     }
-    public function birds()
+    public function bird()
     {
         return $this->hasMany(Bird::class,'birds');
+    }
+    public function order()
+    {
+        return $this->hasMany(Order::class,'orders');
     }
 }

@@ -8,8 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="zxx">
 
 <head>
-	<title>Kicau</title>
-	<!-- custom-theme -->
+	<title>@yield('title')</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="Downy Shoes Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -25,6 +24,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</script>
 	<!-- //custom-theme -->
 	<link href="{{url('src/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all" />
+	<link rel="stylesheet" href="{{url('src/css/about.css')}}" type="text/css" media="screen" property="" />
 	<link rel="stylesheet" href="{{url('src/css/shop.css')}}" type="text/css" media="screen" property="" />
 	<link href="{{url('src/css/style7.css')}}" rel="stylesheet" type="text/css" media="all" />
 	<link href="{{url('src/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
@@ -38,12 +38,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <body>
 	<!-- banner -->
-	<div class="banner_top" id="home">
+@include('sweetalert::alert')
+<div class="banner_top innerpage" id="home">
 		<div class="wrapper_top_w3layouts">
-
 			<div class="header_agileits">
-				<div class="logo">
-					<h1><a class="navbar-brand" href="{{url('/')}}"><span>Burung</span> <i>Kicau</i></a></h1>
+				<div class="logo inner_page_log">
+					<h1><a class="navbar-brand" href="{{url('/dashboard')}}"><span>Burung</span> <i>Kicau</i></a></h1>
 				</div>
 				<div class="overlay overlay-contentpush">
 					<button type="button" class="overlay-close"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -51,176 +51,55 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<nav>
 						<ul>
 							<li><a href="{{url('/')}}" class="active">Beranda</a></li>
-							{{-- @if(Route::has('login'))
-								@auth
-								@if(count($notif) != 0)
-								<li><a href="{{url('/notification')}}">Notifikasi <span class="badge badge-danger">{{count($notif)}}</span></a></li>									
-								@else
-								<li><a href="">Notifikasi <span class="badge badge-danger"></span></a></li>				
-								@endif					
-								@endauth
-							@endif	 --}}
 							<li><a href="{{url('/about')}}">Tentang kami</a></li>
-							<li><a href="{{url('/contact')}}">Kontak</a></li>
 							<li><a href="{{ url('/bird') }}">Pesan sekarang</a></li>
-							@if(Route::has('login'))
-							@auth
-							<li><a href="{{ url('/checkout/'.Auth::id()) }}">Check Out</a></li>
-							<li>
-								<a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-								class="fa fa-power-off me-1 ms-1"></i> Logout</a>
-								<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-									@csrf
-								</form>
-							</li>
-							@else
-							<li><a href="{{route('login')}}">Login</a></li>
-							@endauth
+							@if (Route::has('login'))
+								@auth
+								<li><a href="{{ url('/checkout/'.Auth::id()) }}">Check Out</a></li>
+								@endauth
 							@endif
+							<li><a href="{{ url('/checkout/status') }}">Status Pemesanan</a></li>
+							<li><a href="{{url('/contact')}}">Kontak</a></li>
 						</ul>
 					</nav>
 				</div>
 				<div class="mobile-nav-button">
 					<button id="trigger-overlay" type="button"><i class="fa fa-bars" aria-hidden="true"></i></button>
 				</div>
-				<!-- search -->
-				<div class="search_w3ls_agileinfo">
-					<div class="cd-main-header">
-						<ul class="cd-header-buttons">
-							<li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
-						</ul>
-					</div>
-					<div id="cd-search" class="cd-search">
-						<form action="{{url('/search')}}" method="GET">
-							<input name="search" type="text" placeholder="Click enter after typing...">
-						</form>
-					</div>
-				</div>
-				<!-- //search -->
-
-				<div class="clearfix"></div>
-			</div>
-			<!-- /slider -->
-			<div class="slider">
-				<div class="callbacks_container">
-					<ul class="rslides callbacks callbacks1" id="slider4">
-						<li>
-							<div class="banner-top2">
-								<div class="banner-info-wthree">
-									<h3>Kacer</h3>
-									<p>Kicauannya selalu bernada riang dan gemar menirukan suara burung lain.</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="banner-top3">
-								<div class="banner-info-wthree">
-									<h3>Kolibri</h3>
-									<p>Burung ini juga mempunyai rekor kepakan sayap tercepat di dunia.</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="banner-top">
-								<div class="banner-info-wthree">
-									<h3>Murai Batu</h3>
-									<p>Kucica Hutan juga dikenal sebagai Murai Batu termasuk ke dalam famili Muscicapidae atau burung cacing.</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="banner-top1">
-								<div class="banner-info-wthree">
-									<h3>Love Bird</h3>
-									<p>Satu burung dari sembilan jenis spesies genus Agapornis.</p>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<!-- //slider -->
-			<ul class="top_icons">
-				<li><a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a></li>
-				<li><a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a></li>
-				<li><a href="#"><span class="fa fa-linkedin" aria-hidden="true"></span></a></li>
-				<li><a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a></li>
-
-			</ul>
-		</div>
-	</div>
-	<!-- //banner -->
-	<!-- /girds_bottom-->
-	<div class="grids_bottom">
-		<div class="style-grids">
-			<div class="col-md-6 style-grid style-grid-1">
-				<img src="{{url('src/images/burung10.jpg')}}" alt="shoe">
 			</div>
 		</div>
-		<div class="col-md-6 style-grid style-grid-2">
-			<div class="style-image-1_info">
-				<div class="style-grid-2-text_info">
-					<h3>Burung Kolibri</h3>
-					<p>Keistimewaan burung Kolibri tidak hanya terletak pada ukuran saja. Burung ini juga mempunyai rekor kepakan sayap tercepat di dunia.</p>
-					<div class="shop-button">
-						<a href="{{url('/bird')}}">Beli Sekarang</a>
-					</div>
-				</div>
+		<!-- //cart details -->
+		<!-- search -->
+		<div class="search_w3ls_agileinfo">
+			<div class="cd-main-header">
+				<ul class="cd-header-buttons">
+					<li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+				</ul>
 			</div>
-			<div class="style-image-2">
-				<img src="{{url('src/images/burung34.png')}}" alt="shoe">
-				<div class="style-grid-2-text">
-					<h3>Burung Kecer</h3>
-				</div>
+			<div id="cd-search" class="cd-search">
+				<form action="{{url('/search')}}" method="GET">
+					<input name="search" type="text" placeholder="Click enter after typing...">
+				</form>
 			</div>
 		</div>
+		<!-- //search -->
 		<div class="clearfix"></div>
-	</div>
-	</div>
-	<!-- //grids_bottom-->
-	<!-- /girds_bottom2-->
-	<div class="grids_sec_2">
-		<div class="style-grids_main">
-			<div class="col-md-6 grids_sec_2_left">
-				<div class="grid_sec_info">
-					<div class="style-grid-2-text_info">
-						<h3>Cucak Rowo</h3>
-						<p>Cucak rawa adalah sejenis burung pengicau dari suku Pycnonotidae. Burung ini juga dikenal umum sebagai krakau, nama di Kapuas Hulu, Kalbar, cucakrawa, cangkurawah, dan barau-barau.</p>
-						<div class="shop-button">
-							<a href="{{url('/bird')}}">Beli Sekarang</a>
-						</div>
-					</div>
-				</div>
-				<div class="style-image-2">
-					<img src="{{url('src/images/b11.png')}}" alt="shoe">
-					<div class="style-grid-2-text">
-						<h3></h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 grids_sec_2_left">
+		<!-- /banner_inner -->
+		<div class="services-breadcrumb_w3ls_agileinfo">
+			<div class="inner_breadcrumb_agileits_w3">
 
-				<div class="style-image-2">
-					<img src="{{url('src/images/b12.jpg')}}" alt="shoe">
-					<div class="style-grid-2-text">
-						<h3></h3>
-					</div>
-				</div>
-				<div class="grid_sec_info last">
-					<div class="style-grid-2-text_info">
-						<h3>Murai Api</h3>
-						<p>Burung murai atau shamas merupakan burung pemakan serangga berukuran sedang dalam genus Copsychus. Burung jenis ini banyak ditemukan di area taman dan hutan di Afrika dan Asia. </p>
-						<div class="shop-button two">
-							<a href="{{url('/bird')}}">Beli Sekarang</a>
-						</div>
-					</div>
-				</div>
+				<ul class="short">
+					<li><a href="{{url('/')}}">Home</a><i>|</i></li>
+					<li>@yield('page')</li>
+				</ul>
 			</div>
-			<div class="clearfix"></div>
 		</div>
+		<!-- //banner_inner -->
 	</div>
-	<!-- //grids_bottom2-->
+
+	<!-- //banner -->
+	<!-- top Products -->
+	@yield('container')
 	<!-- /Properties -->
 	<div class="mid_slider_w3lsagile">
 		<div class="col-md-3 mid_slider_text">
@@ -288,6 +167,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	<!-- /newsletter-->
 	<!-- //newsletter-->
+
 	<!-- footer -->
 	<div class="footer_agileinfo_w3">
 		<div class="footer_inner_info_w3ls_agileits">
@@ -379,10 +259,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	</div>
 	<!-- //footer -->
-    <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 	<!-- js -->
 	<script type="text/javascript" src="{{url('src/js/jquery-2.1.4.min.js')}}"></script>
 	<!-- //js -->
+	<!-- cart-js -->
+	<script src="{{url('src/js/minicart.js')}}"></script>
+	<script>
+		shoe.render();
+
+		shoe.cart.on('shoe_checkout', function (evt) {
+			var items, len, i;
+
+			if (this.subtotal() > 0) {
+				items = this.items();
+
+				for (i = 0, len = items.length; i < len; i++) {}
+			}
+		});
+	</script>
+	<!-- //cart-js -->
 	<!-- /nav -->
 	<script src="{{url('src/js/modernizr-2.6.2.min.js')}}"></script>
 	<script src="{{url('src/js/classie.js')}}"></script>
@@ -404,28 +300,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	</script>
 	<!-- //cart-js -->
-	<!--search-bar-->
-	<script src="{{url('src/js/search.js')}}"></script>
-	<!--//search-bar-->
-	<script src="{{url('src/js/responsiveslides.min.js')}}"></script>
+	<!-- script for responsive tabs -->
+	<script src="{{url('src/js/easy-responsive-tabs.js')}}"></script>
 	<script>
-		$(function () {
-			$("#slider4").responsiveSlides({
-				auto: true,
-				pager: true,
-				nav: true,
-				speed: 1000,
-				namespace: "callbacks",
-				before: function () {
-					$('.events').append("<li>before event fired.</li>");
-				},
-				after: function () {
-					$('.events').append("<li>after event fired.</li>");
+		$(document).ready(function () {
+			$('#horizontalTab').easyResponsiveTabs({
+				type: 'default', //Types: default, vertical, accordion           
+				width: 'auto', //auto or any width like 600px
+				fit: true, // 100% fit in a container
+				closed: 'accordion', // Start closed if in accordion view
+				activate: function (event) { // Callback function if tab is switched
+					var $tab = $(this);
+					var $info = $('#tabInfo');
+					var $name = $('span', $info);
+					$name.text($tab.text());
+					$info.show();
 				}
+			});
+			$('#verticalTab').easyResponsiveTabs({
+				type: 'vertical',
+				width: 'auto',
+				fit: true
 			});
 		});
 	</script>
-	<!-- js for portfolio lightbox -->
+	<!--search-bar-->
+	<script src="{{url('src/js/search.js')}}"></script>
+	<!--//search-bar-->
 	<!-- start-smoth-scrolling -->
 	<script type="text/javascript" src="{{url('src/js/move-top.js')}}"></script>
 	<script type="text/javascript" src="{{url('src/js/easing.js')}}"></script>
@@ -440,10 +341,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	</script>
 	<!-- //end-smoth-scrolling -->
-
 	<script type="text/javascript" src="{{url('src/js/bootstrap-3.1.1.min.js')}}"></script>
-
-
 </body>
 
 </html>
